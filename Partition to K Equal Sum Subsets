@@ -1,0 +1,30 @@
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        target=sum(nums)//k
+        len_part, rem = divmod(len(nums), k)
+        if not sum(nums) % k:
+            a=[]
+            b=[]
+            c=[]
+            nums.sort()
+            for i,j in enumerate(nums):
+                b.append([j,i])
+            for j in range(1,len(nums)):
+                for i in combinations(b,j):
+                    cnt=0
+                    if sum(row[0] for row in i)==target:
+                        for l in i:
+                            if l[1] in c:
+                                cnt+=1
+                        if cnt>0:
+                            continue
+                        for l in i:
+                            c.append(l[1])
+                        a.append(i)
+            if len(a)==k:
+                return True
+            
+                
+        return False 
+    
+        
