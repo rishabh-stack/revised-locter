@@ -1,0 +1,13 @@
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        ma=0
+        def solve(root):
+            nonlocal ma
+            if root is None:
+                return 0
+            x=solve(root.left)
+            y=solve(root.right)
+            ma=max(ma,x+y)
+            return (max(x,y)+1)
+        solve(root)
+        return ma
